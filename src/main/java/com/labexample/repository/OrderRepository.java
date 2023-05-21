@@ -24,7 +24,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 
     @Query(value = "SELECT concat('order_', o.id)" +
             " FROM orders o" +
-            " WHERE o.id <> 1 AND NOT EXISTS (" +
+            " WHERE o.id <> :orderId AND NOT EXISTS (" +
             "        SELECT op2.product_id" +
             "        FROM order_product op2" +
             "        WHERE op2.order_id = :orderId" +
@@ -33,7 +33,7 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
             "        FROM order_product op" +
             "        WHERE op.order_id = o.id" +
             "    )" +
-            "order by o.id", nativeQuery = true)
+            " order by o.id", nativeQuery = true)
     List<String> specialQuery7(Long orderId);
     @Query(value = "select distinct concat('order_', order_id) from order_product pr" +
             " where pr.order_id <> :orderId and not exists(" +
