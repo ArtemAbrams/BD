@@ -20,7 +20,7 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
              " from Client c")
     List<ClientDto> fetchAll();
 
-    @Query(value = "select new com.labexample.DTO.ClientDto(cm.name, cm.surname,cm.birthday,cm.mobilePhone,cm.gender)" +
+    @Query(value = "  select distinct new com.labexample.DTO.ClientDto(cm.name, cm.surname,cm.birthday,cm.mobilePhone,cm.gender)" +
                     "  from Client cm " +
                     "  inner join cm.orders c " +
                     "  inner join c.delivery t " +
