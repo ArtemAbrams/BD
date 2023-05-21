@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .row {
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            margin-bottom: 30px;
+        }
+
+        h5 {
+            margin-bottom: 10px;
+        }
+
+        .link-button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            border-radius: 5px;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[type="submit"],
+        input[type="reset"] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h5>Download available clients:</h5>
+        <form method="POST" action="/download-clients">
+            <button type="submit" name="submit" value="value" class="link-button">Download clients</button>
+        </form>
+    </div>
+    <div class="row">
+        <h5>Download available orders:</h5>
+        <form method="POST" action="/download-orders">
+            <button type="submit" name="submit" value="value" class="link-button">Download orders</button>
+        </form>
+    </div>
+    <div class="row">
+        <h5>Download available products:</h5>
+        <form method="POST" action="/download-products">
+            <button type="submit" name="submit" value="value" class="link-button">Download products</button>
+        </form>
+    </div>
+    <h1>Знайти всіх клієнтів чиї замолення постачають постачальники на цьому транспорті та дата замовлення пізніша за введену</h1>
+    <div class="row">
+        <form action="/query1" method="post">
+            <p>Year: <input type="text" name="year" /></p>
+            <p>Month: <input type="text" name="month" /></p>
+            <p>Day: <input type="text" name="day" /></p>
+            <p>Transport: <input type="text" name="transport" /></p>
+            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+        </form>
+    </div>
+    <h1>Знайти всіх постачальників, які постачають принаймні один товар цього кольору, та менше за розміром ніж</h1>
+    <div class="row">
+        <form th:action="@{/query2}" method="post">
+            <p>Colors: <input type="text" th:value="${colors}" name="colors"/></p>
+            <p>Train max size: <input type="text" th:value="${productMaxSize}" name="productMaxSize"/></p>
+            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+        </form>
+    </div>
+    <h1>Знайти фамілію, ім`я клієнта та середню ціну товарів, клієнтів заданого ім`я та товару заданого типу</h1>
+    <div class="row">
+        <form th:action="@{/query3}" method="post">
+            <p>Type: <input type="text" th:value="${type}" name="type"/></p>
+            <p>Name client: <input type="text" th:value="${name}" name="name"/></p>
+            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+        </form>
+    </div><h1>Знайти номера телефону усіх клієнтів чиї замовлення мають постачальника не з іменем :</h1>
+    <div class="row">
+        <form th:action="@{/query4}" method="post">
+            <p>Name: <input type="text" th:value="${name}" name="name"/></p>
+            <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+        </form>
+    </div>
+</div><h1>Знайти клієнтів, що замовили більше ніж дана кількість продуктів:</h1>
+<div class="row">
+    <form th:action="@{/query5}" method="post">
+        <p>Name: <input type="text" th:value="${count}" name="count"/></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</div>
+</div><h1>знайти замовлення які мають продукти, введенного замовлення:</h1>
+<div class="row">
+    <form th:action="@{/query6}" method="post">
+        <p>Name: <input type="text" th:value="${orderId}" name="orderId"/></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</div>
+</div>
+</div>
+<h1>Знайти замовлення які мають принаймні всі продукти, що і замовлення, яке ви введете:</h1>
+<div class="row">
+    <form th:action="@{/query7}" method="post">
+        <p>Name: <input type="text" th:value="${orderId}" name="orderId"/></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</div>
+<h1>Знайти замовлення які мають всі ті ж продукти, що і замовлення, яке ви введете:</h1>
+<div class="row">
+    <form th:action="@{/query8}" method="post">
+        <p>Name: <input type="text" th:value="${orderId}" name="orderId"/></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</div>
+<h1>Знайти замовлення які мають всі ті ж продукт, що і замовлення, яке ви введете та обов`язково ще якісь:</h1>
+<div class="row">
+    <form th:action="@{/query9}" method="post">
+        <p>Name: <input type="text" th:value="${orderId}" name="orderId"/></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</div>
+</div>
+</body>
+</html>
